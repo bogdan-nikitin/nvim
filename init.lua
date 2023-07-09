@@ -1,22 +1,28 @@
-require('plugins')
-require('ts')
-require('lsp')
-require('nvim_cmp')
-require('dap_config')
-require('run')
-require('monokai').setup {}
--- require("autoclose").setup()
+if vim.fn.has('win16') or vim.fn.has('win32') or vim.fn.has('win64') or vim.fn.has('win95') then
+    vim.cmd('set runtimepath+=~/vimfiles,~/vimfiles/after')
+    vim.cmd('set packpath+=~/vimfiles')
+    vim.cmd('source ~/_vimrc')
+else
+    vim.cmd('source ~/.vimrc')
+end
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup("plugins")
+require('keymaps')
 
 -- local opt = vim.opt
-local keymap = vim.keymap
-
 -- opt.signcolumn = 'yes' -- Moved to LspAttach
 
-keymap.set("n", "<space>o", "o<ESC>k")
-keymap.set("n", "<space>O", "O<ESC>j")
-
-
---vim.api.nvim_create_user_command('LspStop', 'lua vim.lsp.stop_client(vim.lsp.get_active_clients())', {})
-
-vim.cmd('source ~/.vimrc')
 
