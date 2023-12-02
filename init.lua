@@ -1,4 +1,4 @@
-if vim.fn.has('win16') or vim.fn.has('win32') or vim.fn.has('win64') or vim.fn.has('win95') then
+if (vim.fn.has('win16') or vim.fn.has('win32') or vim.fn.has('win64') or vim.fn.has('win95')) == 1 then
     vim.cmd('set runtimepath+=~/vimfiles,~/vimfiles/after')
     vim.cmd('set packpath+=~/vimfiles')
     vim.cmd('source ~/_vimrc')

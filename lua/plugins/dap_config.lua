@@ -13,7 +13,8 @@ return {
           executable = {
             -- CHANGE THIS to your path!
             -- command = '/Users/bogdan_nikitin/.config/nvim/daps/codelldb/extension/adapter/codelldb',
-            command = vim.fn.stdpath("data") .. '/mason/bin/codelldb.cmd',
+            -- command = vim.fn.stdpath("data") .. '/mason/bin/codelldb.cmd',
+            command = vim.fn.stdpath("data") .. '/mason/bin/codelldb',
             args = {"--port", "${port}"},
 
             -- On windows you may have to uncomment this:
@@ -21,10 +22,18 @@ return {
           }
         }
 
+        dap.adapters.lldb = {
+            type = 'executable',
+            command = '/opt/homebrew/Cellar/llvm/17.0.3/bin/lldb-vscode',
+            name = 'lldb',
+        }
+
+        dap.adapters.cpp = dap.adapters.codelldb
+
         dap.configurations.cpp = {
           {
             name = "Launch file",
-            type = "codelldb",
+            type = "lldb",
             request = "launch",
             program = function()
               return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
