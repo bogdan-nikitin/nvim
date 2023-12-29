@@ -8,15 +8,20 @@ return {
         end
     },
     'bkad/CamelCaseMotion',
+    {
+        'kana/vim-textobj-entire',
+        dependencies = {'kana/vim-textobj-user'}
+    },
 
-    -- Coloscheme
+    -- Colorscheme
      {
-        'tanvirtin/monokai.nvim',
+        'navarasu/onedark.nvim',
         lazy = false, -- make sure we load this during startup if it is your main colorscheme
         priority = 1000, -- make sure to load this before all the other start plugins
         config = function()
             -- load the colorscheme here
-            require('monokai').setup {}
+            -- require('monokai').setup {}
+            require('onedark').load()
         end,
     },
     -- "folke/trouble.nvim" -- bugs with quickfix
@@ -26,10 +31,12 @@ return {
     -- }
     
     -- Other colorschemes
+    'tanvirtin/monokai.nvim',
     -- 'maxmx03/fluoromachine.nvim'
-    -- 'navarasu/onedark.nvim'
+    -- 'navarasu/onedark.nvim',
     -- 'nvim-tree/nvim-web-devicons'
 
+    -- Auto pairs
     -- "Raimondi/delimitMate",
     --'m4xshen/autoclose.nvim' -- poor defaults
     -- 'jiangmiao/auto-pairs'
