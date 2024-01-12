@@ -13,8 +13,8 @@ return {
           executable = {
             -- CHANGE THIS to your path!
             -- command = '/Users/bogdan_nikitin/.config/nvim/daps/codelldb/extension/adapter/codelldb',
-            -- command = vim.fn.stdpath("data") .. '/mason/bin/codelldb.cmd',
-            command = vim.fn.stdpath("data") .. '/mason/bin/codelldb',
+            command = vim.fn.stdpath("data") .. '/mason/bin/codelldb.cmd',
+            -- command = vim.fn.stdpath("data") .. '/mason/bin/codelldb',
             args = {"--port", "${port}"},
 
             -- On windows you may have to uncomment this:
@@ -33,7 +33,7 @@ return {
         dap.configurations.cpp = {
           {
             name = "Launch file",
-            type = "lldb",
+            type = "codelldb",
             request = "launch",
             program = function()
               return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
@@ -48,6 +48,12 @@ return {
         vim.keymap.set('n', '<F10>', require 'dap'.step_over)
         vim.keymap.set('n', '<F12>', require 'dap'.step_out)
         vim.keymap.set('n', '<space>b', require 'dap'.toggle_breakpoint)
+
+        vim.keymap.set('n', '<space>dc', require 'dap'.continue)
+        vim.keymap.set('n', '<space>di', require 'dap'.step_into)
+        vim.keymap.set('n', '<space>ds', require 'dap'.step_over)
+        vim.keymap.set('n', '<space>do', require 'dap'.step_out)
+        vim.keymap.set('n', '<space>dbb', require 'dap'.toggle_breakpoint)
 
         dap.listeners.after.event_initialized["dapui_config"] = function()
           dapui.open()
