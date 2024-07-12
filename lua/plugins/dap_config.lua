@@ -1,6 +1,6 @@
 return { 
     "rcarriga/nvim-dap-ui", 
-    dependencies = {"mfussenegger/nvim-dap"},
+    dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
     config = function() 
         local dap = require('dap')
         local dapui = require("dapui")
@@ -13,8 +13,8 @@ return {
           executable = {
             -- CHANGE THIS to your path!
             -- command = '/Users/bogdan_nikitin/.config/nvim/daps/codelldb/extension/adapter/codelldb',
-            command = vim.fn.stdpath("data") .. '/mason/bin/codelldb.cmd',
-            -- command = vim.fn.stdpath("data") .. '/mason/bin/codelldb',
+            -- command = vim.fn.stdpath("data") .. '/mason/bin/codelldb.cmd',
+            command = vim.fn.stdpath("data") .. '/mason/bin/codelldb',
             args = {"--port", "${port}"},
 
             -- On windows you may have to uncomment this:
