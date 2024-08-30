@@ -1,5 +1,7 @@
 -- TODO: Change space to leader, map leader to space
 
+vim.cmd('language en_US')
+
 if (vim.fn.has('win16') or vim.fn.has('win32') or vim.fn.has('win64') or vim.fn.has('win95')) == 1 then
     vim.cmd('set runtimepath+=~/vimfiles,~/vimfiles/after')
     vim.cmd('set packpath+=~/vimfiles')
