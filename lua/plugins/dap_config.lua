@@ -13,8 +13,7 @@ return {
           executable = {
             -- CHANGE THIS to your path!
             -- command = '/Users/bogdan_nikitin/.config/nvim/daps/codelldb/extension/adapter/codelldb',
-            -- command = vim.fn.stdpath("data") .. '/mason/bin/codelldb.cmd',
-            command = vim.fn.stdpath("data") .. '/mason/bin/codelldb',
+            command = vim.fn.stdpath("data") .. (vim.g.is_windows and '/mason/bin/codelldb.cmd' or '/mason/bin/codelldb'),
             args = {"--port", "${port}"},
 
             -- On windows you may have to uncomment this:
@@ -31,16 +30,16 @@ return {
         dap.adapters.cpp = dap.adapters.codelldb
 
         dap.configurations.cpp = {
-          {
-            name = "Launch file",
-            type = "codelldb",
-            request = "launch",
-            program = function()
-              return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-            end,
-            cwd = '${workspaceFolder}',
-            stopOnEntry = false,
-          },
+            {
+                name = "Launch file",
+                type = "codelldb",
+                request = "launch",
+                program = function()
+                    return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+                end,
+                cwd = '${workspaceFolder}',
+                stopOnEntry = false,
+            },
         }
 
         vim.keymap.set('n', '<F5>', require 'dap'.continue)

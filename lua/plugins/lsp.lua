@@ -13,7 +13,31 @@ return {
         lspconfig.pyright.setup {
             capabilities = capabilities,
         }
+        lspconfig.hls.setup{
+            filetypes = { 'haskell', 'lhaskell', 'cabal' },
+            settings = {
+                haskell = {
+                    cabalFormattingProvider = "cabalfmt",
+                    formattingProvider = "stylish-haskell"
+                }
+            }
+        }
 
+        lspconfig.typst_lsp.setup{
+            settings = {
+                exportPdf = "never" -- Choose onType, onSave or never.
+                -- serverPath = "" -- Normally, there is no need to uncomment it.
+            }
+        }
+
+        -- Use rustaceanvim instead
+        -- lspconfig.rust_analyzer.setup {
+        --     -- Server-specific settings. See `:help lspconfig-setup`
+        --     settings = {
+        --         ['rust-analyzer'] = {},
+        --     },
+        -- }
+        --
         -- Global mappings.
         -- See `:help vim.diagnostic.*` for documentation on any of the below functions
         vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)

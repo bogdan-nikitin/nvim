@@ -88,5 +88,23 @@ return {
             }
         end
     },
+    -- {
+    --     'nvim-lualine/lualine.nvim',
+    --     dependencies = { 'nvim-tree/nvim-web-devicons' },
+    --     config = function()
+    --         require('lualine').setup()
+    --     end
+    -- },
+    {
+        'mrcjkb/rustaceanvim',
+        version = '^5', -- Recommended
+        lazy = false, -- This plugin is already lazy
+    },
+    {
+        'nvim-tree/nvim-tree.lua',
+        config = function()
+            require("nvim-tree").setup()
+        end
+    },
 }
 

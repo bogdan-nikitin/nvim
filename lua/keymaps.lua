@@ -19,3 +19,6 @@ keymap.set("n", "<A-h>", "<C-w>h")
 keymap.set("n", "<A-j>", "<C-w>j")
 keymap.set("n", "<A-k>", "<C-w>k")
 keymap.set("n", "<A-l>", "<C-w>l")
+
+-- keymap.set("n", "<space>x", ":Lexplore<CR>")
+keymap.set("n", "<space>x", require'nvim-tree.api'.tree.toggle)
