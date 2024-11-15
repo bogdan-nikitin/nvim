@@ -82,10 +82,14 @@ return {
         "ahmedkhalf/project.nvim",
         config = function()
             require("project_nvim").setup {
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
+                sync_root_with_cwd = true,
+                respect_buf_cwd = true,
+                update_focused_file = {
+                    enable = true,
+                    update_root = true
+                },
             }
+            require('telescope').load_extension('projects')
         end
     },
     -- {
@@ -99,6 +103,21 @@ return {
         'mrcjkb/rustaceanvim',
         version = '^5', -- Recommended
         lazy = false, -- This plugin is already lazy
+        config = function()
+            vim.g.rustaceanvim = {
+                server = {
+                    default_settings = {
+                        ['rust-analyzer'] = {
+                            diagnostics = {
+                                experimental = {
+                                    enable = true,
+                                },
+                            },
+                        },
+                    },
+                },
+            }
+        end
     },
     {
         'nvim-tree/nvim-tree.lua',

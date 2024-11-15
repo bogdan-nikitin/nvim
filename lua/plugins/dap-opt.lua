@@ -23,11 +23,11 @@ return {
 
         dap.adapters.lldb = {
             type = 'executable',
-            command = '/opt/homebrew/Cellar/llvm/17.0.3/bin/lldb-vscode',
+            command = '/opt/homebrew/opt/llvm/bin/lldb-dap',
             name = 'lldb',
         }
 
-        dap.adapters.cpp = dap.adapters.codelldb
+        -- dap.adapters.cpp = dap.adapters.codelldb
 
         dap.configurations.cpp = {
             {

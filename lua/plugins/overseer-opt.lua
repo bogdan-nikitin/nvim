@@ -7,6 +7,5 @@ return {
         require("overseer").setup({
             templates = { "builtin", "user.cpp_adv_build" },
         }) 
-        require('telescope').load_extension('projects')
     end
 }
