@@ -2,9 +2,8 @@
 
 vim.g.is_windows = vim.fn.has("win64") == 1 or vim.fn.has("win32") == 1 or vim.fn.has("win16") == 1
 
-vim.cmd('language en_US')
-
 if vim.g.is_windows then
+    vim.cmd('language en_US')
     vim.cmd('set runtimepath+=~/vimfiles,~/vimfiles/after')
     vim.cmd('set packpath+=~/vimfiles')
     vim.cmd('source ~/_vimrc')
