@@ -143,5 +143,40 @@ return {
             require("nvim-tree").setup()
         end
     },
+    {
+        'nvim-treesitter/nvim-treesitter',
+        build = ':TSUpdate',
+        config = function()
+            require'nvim-treesitter.configs'.setup {
+                incremental_selection = {
+                    enable = true,
+                    keymaps = {
+                        init_selection = "gnn", -- set to `false` to disable one of the mappings
+                        node_incremental = "grn",
+                        scope_incremental = "grc",
+                        node_decremental = "grm",
+                    },
+                },
+            }
+        end
+    },
+    {
+        'RRethy/nvim-treesitter-textsubjects',
+        dependencies = {"nvim-treesitter/nvim-treesitter"},
+        config = function()
+            require('nvim-treesitter.configs').setup {
+                textsubjects = {
+                    enable = true,
+                    prev_selection = ',', -- (Optional) keymap to select the previous selection
+                    keymaps = {
+                        ['.'] = 'textsubjects-smart',
+                        [';'] = 'textsubjects-container-outer',
+                        ['i;'] = 'textsubjects-container-inner',
+                        ['i;'] = { 'textsubjects-container-inner', desc = "Select inside containers (classes, functions, etc.)" },
+                    },
+                },
+            }
+        end
+    },
 }
 

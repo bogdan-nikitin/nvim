@@ -22,3 +22,5 @@ keymap.set("n", "<A-l>", "<C-w>l")
 
 -- keymap.set("n", "<space>x", ":Lexplore<CR>")
 keymap.set("n", "<space>x", require'nvim-tree.api'.tree.toggle)
+local hop = require('hop')
+keymap.set('n', '<leader><leader>', hop.hint_words)
