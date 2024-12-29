@@ -22,7 +22,8 @@ return {
         --         }
         --     }
         -- }
-        lspconfig.typst_lsp.setup{
+        lspconfig.tinymist.setup{
+            -- TODO: Check
             settings = {
                 exportPdf = "never" -- Choose onType, onSave or never.
                 -- serverPath = "" -- Normally, there is no need to uncomment it.
