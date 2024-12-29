@@ -14,7 +14,7 @@ return {
     },
 
     -- Colorscheme
-     {
+    {
         'navarasu/onedark.nvim',
         lazy = false, -- make sure we load this during startup if it is your main colorscheme
         priority = 1000, -- make sure to load this before all the other start plugins
@@ -29,7 +29,7 @@ return {
     --     'LucHermitte/vim-compil-hints',
     --     requires = { {'LucHermitte/lh-vim-lib'} }
     -- }
-    
+
     -- Other colorschemes
     'tanvirtin/monokai.nvim',
     -- 'maxmx03/fluoromachine.nvim'
@@ -51,27 +51,27 @@ return {
         'nvim-telescope/telescope-ui-select.nvim',
         config = function()
             require("telescope").setup {
-              extensions = {
-                ["ui-select"] = {
-                  require("telescope.themes").get_dropdown {
-                    -- even more opts
-                  }
+                extensions = {
+                    ["ui-select"] = {
+                        require("telescope.themes").get_dropdown {
+                            -- even more opts
+                        }
 
-                  -- pseudo code / specification for writing custom displays, like the one
-                  -- for "codeactions"
-                  -- specific_opts = {
-                  --   [kind] = {
-                  --     make_indexed = function(items) -> indexed_items, width,
-                  --     make_displayer = function(widths) -> displayer
-                  --     make_display = function(displayer) -> function(e)
-                  --     make_ordinal = function(e) -> string
-                  --   },
-                  --   -- for example to disable the custom builtin "codeactions" display
-                  --      do the following
-                  --   codeactions = false,
-                  -- }
+                        -- pseudo code / specification for writing custom displays, like the one
+                        -- for "codeactions"
+                        -- specific_opts = {
+                        --   [kind] = {
+                        --     make_indexed = function(items) -> indexed_items, width,
+                        --     make_displayer = function(widths) -> displayer
+                        --     make_display = function(displayer) -> function(e)
+                        --     make_ordinal = function(e) -> string
+                        --   },
+                        --   -- for example to disable the custom builtin "codeactions" display
+                        --      do the following
+                        --   codeactions = false,
+                        -- }
+                    }
                 }
-              }
             }
             -- To get ui-select loaded and working with telescope, you need to call
             -- load_extension, somewhere after setup function:
@@ -117,6 +117,24 @@ return {
                     },
                 },
             }
+        end
+    },
+    {
+        'mrcjkb/haskell-tools.nvim',
+        version = '^4', -- Recommended
+        lazy = false, -- This plugin is already lazy
+        confing = function()
+            -- vim.g.haskell_tools = {
+            --     hls = {
+            --         filetypes = { 'haskell', 'lhaskell', 'cabal' },
+            --         settings = {
+            --             haskell = {
+            --                 cabalFormattingProvider = "cabalfmt",
+            --                 formattingProvider = "stylish-haskell"
+            --             }
+            --         }
+            --     },
+            -- }
         end
     },
     {
