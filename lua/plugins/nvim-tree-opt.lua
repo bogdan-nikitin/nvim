@@ -6,9 +6,9 @@ return {
         local api = require'nvim-tree.api'
 
         keymap.set("n", "<space>et", api.tree.toggle)
-        keymap.set("n", "<space>eo", api.tree.focus)
+        keymap.set("n", "<space>eo", api.tree.open)
         keymap.set("n", "<space>ef", function() 
-            api.tree.toggle({find_file = true})
+            api.tree.find_file({focus = true})
         end)
     end,
 }

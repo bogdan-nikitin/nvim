@@ -36,11 +36,6 @@ return {
     -- 'navarasu/onedark.nvim',
     -- 'nvim-tree/nvim-web-devicons'
 
-    -- Auto pairs
-    -- "Raimondi/delimitMate",
-    --'m4xshen/autoclose.nvim' -- poor defaults
-    -- 'jiangmiao/auto-pairs'
-
     {
         'lewis6991/gitsigns.nvim',
         config = function()
@@ -178,5 +173,11 @@ return {
             }
         end
     },
+    {
+        'L3MON4D3/LuaSnip',
+        config = function()
+            require("luasnip.loaders.from_snipmate").lazy_load()
+        end
+    }
 }
 
