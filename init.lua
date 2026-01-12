@@ -1,22 +1,74 @@
-require('plugins')
-require('ts')
-require('lsp')
-require('nvim_cmp')
-require('dap_config')
-require('run')
-require('monokai').setup {}
--- require("autoclose").setup()
+-- TODO: Change space to leader, map leader to space
+
+vim.g.is_windows = vim.fn.has("win64") == 1 or vim.fn.has("win32") == 1 or vim.fn.has("win16") == 1
+
+if vim.g.is_windows then
+    vim.cmd('language en_US')
+    vim.cmd('set runtimepath+=~/vimfiles,~/vimfiles/after')
+    vim.cmd('set packpath+=~/vimfiles')
+    vim.cmd('source ~/_vimrc')
+else
+    vim.cmd('source ~/.vimrc')
+end
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+vim.g.haskell_tools = {
+    tools = {
+        repl = {
+            handler = 'toggleterm'
+        },
+
+    },
+    hls = {
+        settings = {
+            haskell = {
+                cabalFormattingProvider = "cabalfmt",
+                formattingProvider = "stylish-haskell"
+            }
+        }
+    },
+}
+require("lazy").setup("plugins")
+require('keymaps')
+
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- optionally enable 24-bit colour
+vim.opt.termguicolors = true
 
 -- local opt = vim.opt
-local keymap = vim.keymap
-
 -- opt.signcolumn = 'yes' -- Moved to LspAttach
 
-keymap.set("n", "<space>o", "o<ESC>k")
-keymap.set("n", "<space>O", "O<ESC>j")
 
 
---vim.api.nvim_create_user_command('LspStop', 'lua vim.lsp.stop_client(vim.lsp.get_active_clients())', {})
-
-vim.cmd('source ~/.vimrc')
-
+local ht = require('haskell-tools')
+local bufnr = vim.api.nvim_get_current_buf()
+local opts = { noremap = true, silent = true, buffer = bufnr, }
+-- haskell-language-server relies heavily on codeLenses,
+-- so auto-refresh (see advanced configuration) is enabled by default
+vim.keymap.set('n', '<space>cl', vim.lsp.codelens.run, opts)
+-- Hoogle search for the type signature of the definition under the cursor
+vim.keymap.set('n', '<space>hs', ht.hoogle.hoogle_signature, opts)
+-- Evaluate all code snippets
+vim.keymap.set('n', '<space>ea', ht.lsp.buf_eval_all, opts)
+-- Toggle a GHCi repl for the current package
+vim.keymap.set('n', '<leader>rr', ht.repl.toggle, opts)
+-- Toggle a GHCi repl for the current buffer
+vim.keymap.set('n', '<leader>rf', function()
+    ht.repl.toggle(vim.api.nvim_buf_get_name(0))
+end, opts)
+vim.keymap.set('n', '<leader>rq', ht.repl.quit, opts)
