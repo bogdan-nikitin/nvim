@@ -2,17 +2,22 @@ return {
     'neovim/nvim-lspconfig',
     config = function()
         -- Setup language servers.
-        local lspconfig = require('lspconfig')
         local builtin = require('telescope.builtin')
         local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-        lspconfig.clangd.setup { 
+        vim.lsp.config('clangd', { 
             cmd = { "clangd", "--completion-style=detailed" }, 
             capabilities = capabilities,
-        }
-        lspconfig.pyright.setup {
+        })
+        vim.lsp.enable('clangd')
+        vim.lsp.config('pyright', {
             capabilities = capabilities,
-        }
+        })
+        vim.lsp.config('ruby_lsp', {
+            init_options = {
+                linters = {}
+            }
+        })
         -- lspconfig.hls.setup{
         --     filetypes = { 'haskell', 'lhaskell', 'cabal' },
         --     settings = {
@@ -22,13 +27,13 @@ return {
         --         }
         --     }
         -- }
-        lspconfig.tinymist.setup{
+        vim.lsp.config('tinymist', {
             -- TODO: Check
             settings = {
                 exportPdf = "never" -- Choose onType, onSave or never.
                 -- serverPath = "" -- Normally, there is no need to uncomment it.
             }
-        }
+        })
 
         -- Use rustaceanvim instead
         -- lspconfig.rust_analyzer.setup {
